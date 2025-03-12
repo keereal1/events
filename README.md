@@ -1,5 +1,1 @@
-# Webpack5
-
-[Руководство по настройке Webpack](https://webpack.js.org/guides/)
-[Руководство по настройке GitHub Actions](https://docs.github.com/en/actions/quickstart)
-![CI](https://github.com/keereal1/ahj-env/actions/workflows/web.yml/badge.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/kl7a4bdptmgyse5p/branch/main?svg=true)](https://ci.appveyor.com/project/keereal1/events/branch/main)
