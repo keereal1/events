@@ -27,17 +27,13 @@ class Goblin {
       const item = document.createElement("div");
       item.className = "field-item";
       this.div.append(item);
-      this.field = document.querySelector(".field-container");
-      this.fieldItems = Array.from(document.querySelectorAll(".field-item"));
     }
+    this.field = document.querySelector(".field-container");
+    this.fieldItems = Array.from(document.querySelectorAll(".field-item"));
   }
   getItem() {
-    let currentIndex = 0;
     let generateIndex = Math.floor(1 + Math.random() * this.fieldItems.length - 1);
-    do {
-      currentIndex = generateIndex;
-      return this.fieldItems[currentIndex];
-    } while (currentIndex != generateIndex);
+    return this.fieldItems[generateIndex];
   }
   activateField() {
     const activeItem = this.getItem();
@@ -63,17 +59,23 @@ class Game {
   start() {
     this.goblin.field.addEventListener("click", this.onItemClick);
     this.goblin.activateField();
-    this.checkScore();
+    this.interval = setInterval(() => {
+      this.goblin.activateField();
+      if (!this.click) {
+        this.addFail();
+      }
+    }, 2000);
+    this.click = false;
   }
   onItemClick(e) {
     if (e.target.closest("img") != null) {
       this.addPoint();
+      this.click = true;
     } else {
       this.addFail();
     }
   }
   checkScore() {
-    clearInterval(this.interval);
     if (this.points.textContent >= 5) {
       alert("Вы победили!");
       this.clearPoints();
@@ -81,13 +83,6 @@ class Game {
       alert("Вы проиграли!");
       this.clearPoints();
     }
-    this.interval = setInterval(() => {
-      this.goblin.activateField();
-      if (!this.click) {
-        this.addFail();
-      }
-    }, 1000);
-    this.click = false;
   }
   clearPoints() {
     this.points.textContent = 0;
