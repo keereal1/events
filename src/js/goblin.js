@@ -12,21 +12,17 @@ export default class Goblin {
       const item = document.createElement("div");
       item.className = "field-item";
       this.div.append(item);
-
-      this.field = document.querySelector(".field-container");
-      this.fieldItems = Array.from(document.querySelectorAll(".field-item"));
     }
+
+    this.field = document.querySelector(".field-container");
+    this.fieldItems = Array.from(document.querySelectorAll(".field-item"));
   }
 
   getItem() {
-    let currentIndex = 0;
     let generateIndex = Math.floor(
       1 + Math.random() * this.fieldItems.length - 1,
     );
-    do {
-      currentIndex = generateIndex;
-      return this.fieldItems[currentIndex];
-    } while (currentIndex != generateIndex);
+    return this.fieldItems[generateIndex];
   }
 
   activateField() {

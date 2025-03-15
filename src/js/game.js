@@ -16,20 +16,25 @@ export default class Game {
   start() {
     this.goblin.field.addEventListener("click", this.onItemClick);
     this.goblin.activateField();
-    this.checkScore();
+    this.interval = setInterval(() => {
+      this.goblin.activateField();
+      if (!this.click) {
+        this.addFail();
+      }
+    }, 2000);
+    this.click = false;
   }
 
   onItemClick(e) {
     if (e.target.closest("img") != null) {
       this.addPoint();
+      this.click = true;
     } else {
       this.addFail();
     }
   }
 
   checkScore() {
-    clearInterval(this.interval);
-
     if (this.points.textContent >= 5) {
       alert("Вы победили!");
       this.clearPoints();
@@ -37,14 +42,6 @@ export default class Game {
       alert("Вы проиграли!");
       this.clearPoints();
     }
-
-    this.interval = setInterval(() => {
-      this.goblin.activateField();
-      if (!this.click) {
-        this.addFail();
-      }
-    }, 1000);
-    this.click = false;
   }
 
   clearPoints() {
